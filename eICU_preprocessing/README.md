@@ -31,7 +31,7 @@ eICU pre-processing
 5) Then run the pre-processing scripts in your terminal. This will need to run overnight:
 
     ```
-    python3 -m eICU_preprocessing.run_all_preprocessing
+    python -m eICU_preprocessing.run_all_preprocessing
     ```
   
 It will create the following directory structure:

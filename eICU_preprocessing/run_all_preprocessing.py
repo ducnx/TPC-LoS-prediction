@@ -8,7 +8,7 @@ import json
 with open('paths.json', 'r') as f:
     eICU_path = json.load(f)["eICU_path"]
 
-if __name__=='__main__':
+if __name__ == '__main__':
     print('==> Removing the stays.txt file if it exists...')
     try:
         os.remove(eICU_path + 'stays.txt')
@@ -18,4 +18,4 @@ if __name__=='__main__':
     timeseries_main(eICU_path, test=False)
     diagnoses_main(eICU_path, cut_off_prevalence)
     flat_and_labels_main(eICU_path)
-    split_train_test(eICU_path, is_test=False)
+    split_train_test(eICU_path, is_test=False, cleanup=False)

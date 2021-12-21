@@ -13,13 +13,16 @@ def create_folder(parent_path, folder):
         os.makedirs(folder_path)
     return folder_path
 
+
 def shuffle_stays(stays, seed=9):
     return shuffle(stays, random_state=seed)
+
 
 def process_table(table_name, table, stays, folder_path):
     table = table.loc[stays].copy()
     table.to_csv('{}/{}.csv'.format(folder_path, table_name))
     return
+
 
 def split_train_test(path, is_test=True, seed=9, cleanup=True, MIMIC=False):
 
@@ -29,12 +32,13 @@ def split_train_test(path, is_test=True, seed=9, cleanup=True, MIMIC=False):
     # that cross into both the train and the test sets
     patients = labels.uniquepid.unique()
 
-    train, test = train_test_split(patients, test_size=0.15, random_state=seed)
-    train, val = train_test_split(train, test_size=0.15/0.85, random_state=seed)
+    train, test = train_test_split(patients, test_size=0.2, random_state=seed)
+    train, val = train_test_split(train, test_size=0.1/0.8, random_state=seed)
 
     print('==> Loading data for splitting...')
     if is_test:
-        timeseries = pd.read_csv(path + 'preprocessed_timeseries.csv', nrows=999999)
+        timeseries = pd.read_csv(
+            path + 'preprocessed_timeseries.csv', nrows=999999)
     else:
         timeseries = pd.read_csv(path + 'preprocessed_timeseries.csv')
     timeseries.set_index('patient', inplace=True)
@@ -72,7 +76,8 @@ def split_train_test(path, is_test=True, seed=9, cleanup=True, MIMIC=False):
 
     return
 
-if __name__=='__main__':
+
+if __name__ == '__main__':
     from eICU_preprocessing.run_all_preprocessing import eICU_path
     parser = argparse.ArgumentParser()
     parser.add_argument('--cleanup', action='store_true')

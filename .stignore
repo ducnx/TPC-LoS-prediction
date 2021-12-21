@@ -1,0 +1,12 @@
+.git/
+.vscode/
+*.pyc
+.ipynb_checkpoints/
+.idea
+.DS_Store
+experiments
+eICU_data
+MIMIC_data
+__pycache__
+figures
+*.csv
